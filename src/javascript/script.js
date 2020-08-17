@@ -1,34 +1,59 @@
-var cards = document.querySelectorAll('.card');
-var hasCardTwisted = false;
-var firstCard, secondCard;
+const cards = document.querySelectorAll('.card');
 
-cards.forEach(card => card.addEventListener('click', clickCard));
-randomize();
+let hasFlippedCard = false;
+let lockBoard = false;
+let firstCard, secondCard;
 
-function clickCard() {
-    this.classList.add('twist');
+function flipCard() {
+  if (lockBoard) return;
+  if (this === firstCard) return;
 
-    if (hasCardTwisted == false) {
-        hasCardTwisted = true;
-        firstCard = this;
-    } else {
-        hasCardTwisted = false;
-        secondCard = this;
+  this.classList.add('twist');
 
-        if (firstCard.id === secondCard.id) {
-            firstCard.removeEventListener('click', clickCard);
-            secondCard.removeEventListener('click', clickCard);
-        } else {
-            setTimeout(() => {
-                firstCard.classList.remove('twist');
-                secondCard.classList.remove('twist');
-            }, 1500)
-        }
-    }
+  if (!hasFlippedCard) {
+    hasFlippedCard = true;
+    firstCard = this;
+
+    return;
+  }
+
+  secondCard = this;
+  checkForMatch();
 }
 
-function randomize() {
-    cards.forEach(card => {
-        card.style.order = Math.floor(Math.random() * cards.length);;
-    });
-};
+function checkForMatch() {
+  let isMatch = firstCard.id === secondCard.id;
+
+  isMatch ? disableCards() : unflipCards();
+}
+
+function disableCards() {
+  firstCard.removeEventListener('click', flipCard);
+  secondCard.removeEventListener('click', flipCard);
+
+  resetBoard();
+}
+
+function unflipCards() {
+  lockBoard = true;
+
+  setTimeout(() => {
+    firstCard.classList.remove('twist');
+    secondCard.classList.remove('twist');
+
+    resetBoard();
+  }, 1500);
+}
+
+function resetBoard() {
+  [hasFlippedCard, lockBoard] = [false, false];
+  [firstCard, secondCard] = [null, null];
+}
+
+(function shuffle() {
+  cards.forEach(card => {
+    card.style.order = Math.floor(Math.random() * cards.length);
+  });
+})();
+
+cards.forEach(card => card.addEventListener('click', flipCard));
