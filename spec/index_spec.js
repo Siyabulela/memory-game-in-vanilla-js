@@ -4,7 +4,7 @@ describe(`index.html`, function() {
     var browser;
 
     beforeEach(function(done) {
-        JSDOM.fromFile(`./src/index.html`).then(function(res) {
+        JSDOM.fromFile(`index.html`).then(function(res) {
             browser = res;
             done();
         });
