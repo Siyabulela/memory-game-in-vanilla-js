@@ -1,5 +1,23 @@
 {
   "dependencies": {
     "jsdom": "^16.3.0"
-  }
+  },
+  "name": "q",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Umuzi-org/Siyabulela-Khumalo-222-memory-game-in-vanilla-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Umuzi-org/Siyabulela-Khumalo-222-memory-game-in-vanilla-js/issues"
+  },
+  "homepage": "https://github.com/Umuzi-org/Siyabulela-Khumalo-222-memory-game-in-vanilla-js#readme",
+  "description": ""
 }
