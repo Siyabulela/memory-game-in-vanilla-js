@@ -6,7 +6,8 @@ let hasFlippedCard = false,
   seconds = ``,
   minutes = ``,
   timeCount = 0,
-  countFlip = 0;
+  countFlip = 0,
+  countSingleFlip = 0;
 
 function setTime() {
   ++timeCount;
@@ -17,6 +18,7 @@ function setTime() {
 function flipCard() {
   if (lockBoard) return;
   if (this === firstCard) return;
+  countSingleFlip++;
 
   this.classList.add("twist");
 
@@ -111,30 +113,50 @@ function alertSeconds(countFlip) {
     countFlip == 2 &&
     document.getElementById("memoryBoard").classList.contains(`x22`)
   ) {
-    window.alert(`${minutes} minutes and ${seconds} seconds`);
+    document.getElementById(
+      "timeSpend"
+    ).innerHTML = `${minutes} min, ${seconds} sec`;
+    document.getElementById("countFlips").innerHTML =
+      countSingleFlip + ` times`;
   }
   if (
     countFlip == 3 &&
     document.getElementById("memoryBoard").classList.contains(`x32`)
   ) {
-    window.alert(`${minutes} minutes and ${seconds} seconds`);
+    document.getElementById(
+      "timeSpend"
+    ).innerHTML = `${minutes} min, ${seconds} sec`;
+    document.getElementById("countFlips").innerHTML =
+      countSingleFlip + ` times`;
   }
   if (
     countFlip == 4 &&
     document.getElementById("memoryBoard").classList.contains(`x42`)
   ) {
-    window.alert(`${minutes} minutes and ${seconds} seconds`);
+    document.getElementById(
+      "timeSpend"
+    ).innerHTML = `${minutes} min, ${seconds} sec`;
+    document.getElementById("countFlips").innerHTML =
+      countSingleFlip + ` times`;
   }
   if (
     countFlip == 6 &&
     document.getElementById("memoryBoard").classList.contains(`x43`)
   ) {
-    window.alert(`${minutes} minutes and ${seconds} seconds`);
+    document.getElementById(
+      "timeSpend"
+    ).innerHTML = `${minutes} min, ${seconds} sec`;
+    document.getElementById("countFlips").innerHTML =
+      countSingleFlip + ` times`;
   }
   if (
     countFlip == 8 &&
     document.getElementById("memoryBoard").classList.contains(`x44`)
   ) {
-    window.alert(`${minutes} minutes and ${seconds} seconds`);
+    document.getElementById(
+      "timeSpend"
+    ).innerHTML = `${minutes} min, ${seconds} sec`;
+    document.getElementById("countFlips").innerHTML =
+      countSingleFlip + ` times`;
   }
 }
