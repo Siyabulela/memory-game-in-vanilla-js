@@ -1,10 +1,18 @@
-let cards = document.querySelectorAll(".card");
-cards = Array.prototype.slice.call(cards)
-
+const cards = document.querySelectorAll(".card");
 let hasFlippedCard = false,
   lockBoard = false,
   firstCard,
-  secondCard;
+  secondCard,
+  seconds = ``,
+  minutes = ``,
+  timeCount = 0,
+  countFlip = 0;
+
+function setTime() {
+  ++timeCount;
+  seconds = timeCount % 60;
+  minutes = Math.floor(timeCount / 60);
+}
 
 function flipCard() {
   if (lockBoard) return;
@@ -32,8 +40,10 @@ function checkForMatch() {
 function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
-
   resetBoard();
+
+  countFlip++;
+  alertSeconds(countFlip);
 }
 
 function unflipCards() {
@@ -46,23 +56,20 @@ function unflipCards() {
     resetBoard();
   }, 500);
 }
-  
+
 function resetBoard() {
   [hasFlippedCard, lockBoard] = [false, false];
   [firstCard, secondCard] = [null, null];
 }
 
 (function shuffle() {
+  setInterval(setTime, 1000);
   cards.forEach((card) => {
     card.style.order = Math.floor(Math.random() * cards.length);
   });
 })();
 
 cards.forEach((card) => card.addEventListener("click", flipCard));
-
-function myFunction() {
-  document.getElementById("gridselection").selectedIndex = 1;
-}
 
 function gridSize(value) {
   if (value == `4x4`) {
@@ -87,7 +94,7 @@ function gridSize(value) {
   }
 }
 
-function removeClasses(){
+function removeClasses() {
   document.getElementById("memoryBoard").classList.remove("x44");
   document.getElementById("memoryBoard").classList.remove("x43");
   document.getElementById("memoryBoard").classList.remove("x42");
@@ -95,6 +102,39 @@ function removeClasses(){
   document.getElementById("memoryBoard").classList.remove("x22");
 }
 
-function onLoad(){
-  location.reload()
+function onLoad() {
+  location.reload();
+}
+
+function alertSeconds(countFlip) {
+  if (
+    countFlip == 2 &&
+    document.getElementById("memoryBoard").classList.contains(`x22`)
+  ) {
+    window.alert(`${minutes} minutes and ${seconds} seconds`);
+  }
+  if (
+    countFlip == 3 &&
+    document.getElementById("memoryBoard").classList.contains(`x32`)
+  ) {
+    window.alert(`${minutes} minutes and ${seconds} seconds`);
+  }
+  if (
+    countFlip == 4 &&
+    document.getElementById("memoryBoard").classList.contains(`x42`)
+  ) {
+    window.alert(`${minutes} minutes and ${seconds} seconds`);
+  }
+  if (
+    countFlip == 6 &&
+    document.getElementById("memoryBoard").classList.contains(`x43`)
+  ) {
+    window.alert(`${minutes} minutes and ${seconds} seconds`);
+  }
+  if (
+    countFlip == 8 &&
+    document.getElementById("memoryBoard").classList.contains(`x44`)
+  ) {
+    window.alert(`${minutes} minutes and ${seconds} seconds`);
+  }
 }
